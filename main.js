@@ -202,35 +202,75 @@
 //   }
 // }
 
-const select = 0
-const blog = [
+// const select = 0
+// const blog = [
+//   {
+//     title:"a",
+//     date:"2020-01-01",
+//     text:"sample1"
+//   },
+//   {
+//     title:"b",
+//     date:"2020-02-01",
+//     text:"sample2"
+//   },
+//   {
+//     title:"c",
+//     date:"2020-03-01",
+//     text:"sample3"
+//   }
+// ]
+// const readline = require('readline').createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+
+// readline.question('titleを入力してください', (answer) => {
+
+//   for(let i = 0; i < blog.length; ++i){
+//     if(blog[i].title == `${answer}`){
+//       console.log(blog[i])
+//     }
+//   }
+//   readline.close();
+// });
+
+//ゲームのキャラクターの一覧のデータ
+const charctar = [
   {
-    title:"a",
-    date:"2020-01-01",
-    text:"sample1"
+    name:"クラウド",
+    lv:23,
+    items:[]
   },
   {
-    title:"b",
-    date:"2020-02-01",
-    text:"sample2"
-  },
-  {
-    title:"c",
-    date:"2020-03-01",
-    text:"sample3"
+    name:"ライトニング",
+    lv:30,
+    items:[]
   }
 ]
+
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
-});
+  });
 
-readline.question('titleを入力してください', (answer) => {
+readline.question('追加するキャラクターを選んでください', (answer1) => {
+  readline.question('追加するアイテムを選んでください', (answer2) => {
+    for(let i = 0; i < charctar.length; ++i){
+      if(charctar[i].name == `${answer1}`){
+        charctar[i].items.push(`${answer2}`);
 
-  for(let i = 0; i < blog.length; ++i){
-    if(blog[i].title == `${answer}`){
-      console.log(blog[i])
+        var data = `${answer2}`;
+        // console.log(data)
+        JSON.stringify(data);
+        var fs = require('fs');
+        fs.writeFile(charctar[i].items, data);
+
+      }
     }
-  }
-  readline.close();
+    for(let i = 0; i < charctar.length; ++i){
+      console.log(charctar[i])
+    }
+    readline.close()
+  });
 });
