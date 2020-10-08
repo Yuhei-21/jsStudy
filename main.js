@@ -259,18 +259,26 @@ readline.question('追加するキャラクターを選んでください', (ans
     for(let i = 0; i < charctar.length; ++i){
       if(charctar[i].name == `${answer1}`){
         charctar[i].items.push(`${answer2}`);
-
-        var data = `${answer2}`;
-        // console.log(data)
-        JSON.stringify(data);
-        var fs = require('fs');
-        fs.writeFile(charctar[i].items, data);
-
       }
     }
+    const fs = require('fs');
+    const text = `${answer2}`;
+    fs.writeFile('savedata.txt', text,err=>{
+      if(!err)return
+      console.error(err)
+    });
+
     for(let i = 0; i < charctar.length; ++i){
       console.log(charctar[i])
     }
     readline.close()
+
+
+    fs.readFile("savedata.txt", 'utf-8', (err, data) => {
+      if (err) throw err;
+        var obj = JSON.parse(data);
+        charctar[1].items.push(obj);
+
+    });
   });
 });
