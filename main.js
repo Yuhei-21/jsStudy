@@ -236,49 +236,173 @@
 // });
 
 //ゲームのキャラクターの一覧のデータ
-const charctar = [
+// const fs = require('fs');
+
+// let charctar = [
+//   {
+//     name:"クラウド",
+//     lv:23,
+//     items:[]
+//   },
+//   {
+//     name:"ライトニング",
+//     lv:30,
+//     items:[]
+//   }
+// ]
+
+// const readline = require('readline').createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+
+// fs.readFile("savedata.txt", 'utf-8', function(err, data) {
+//   if(err){
+//     console.log("セーブデータがありません")
+//   }else{
+//     charctar = JSON.parse(data);
+//   }
+//   readline.question('追加するキャラクターを選んでください', (answer1) => {
+//     readline.question('追加するアイテムを選んでください', (answer2) => {
+//       readline.question('レベルアップしますか？y,n', (answer3) => {
+//         for(let i = 0; i < charctar.length; ++i){
+//           if(charctar[i].name == `${answer1}`){
+//             charctar[i].items.push(`${answer2}`);
+//             if(`${answer3}` == "y"){
+//               charctar[i].lv = charctar[i].lv + 1;
+//             }
+//           }
+//         }
+
+//         const text = JSON.stringify(charctar)
+    
+//         fs.writeFile('savedata.txt', text,err=>{
+//           if(!err)return
+//           console.error(err)
+//         });
+    
+//         for(let i = 0; i < charctar.length; ++i){
+//           console.log(charctar[i])
+//         }
+//         readline.close()
+//       });
+//     });
+//   });
+// });
+
+// async function a(){
+//   console.log("a")
+// }
+
+// a()
+// .then(()=>{
+//   console.log("c")
+// }).catch(e=>{
+//   console.error(e)
+// })
+
+// console.log("b")
+
+// let array = [
+//   {
+//     name:"1:大阪"
+//   },
+//   {
+//     name:"2:東京"
+//   },
+//   {
+//     name:"3:沖縄"
+//   },
+//   {
+//     name:"4:北海道"
+//   },
+//   {
+//     name:"5:鹿児島"
+//   },
+// ]
+
+// const readline = require('readline').createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+
+// console.log("最も大きい都道府県は？")
+
+// for(let i = 0; i < array.length; ++i){
+//   console.log(array[i].name)
+// }
+
+// readline.question('答えを入力', (answer1) => {
+//   if((answer1 == "北海道") || (answer1 == 4)){
+//     console.log("正解")
+//   }else{
+//     console.log("不正解")
+//   }
+// });
+
+// const readline = require('readline').createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+// readline.question('一つ目の数字を入力', (answer1) => {
+//   readline.question('二つ目の数字を入力', (answer2) => {
+//     readline.question(answer1 + "*" + answer2 + "の答えを入力", (answer3) => {
+//       if(answer1*answer2 == answer3){
+//         console.log("正解")
+//       }else{
+//         console.log("不正解")
+//       }
+//       readline.close()
+//     });
+//   });
+// });
+
+const fs = require('fs');
+let users = [
   {
-    name:"クラウド",
-    lv:23,
-    items:[]
+    uid : "0092212324124sfg",
+    publish: false,
+    name: "daichi"
   },
   {
-    name:"ライトニング",
-    lv:30,
-    items:[]
-  }
+    uid : "0092ar23fasdfad2",
+    publish: true,
+    name: "yuhei"
+  },
+  {
+    uid : "dsklfklsdj171878",
+    publish: true,
+    name: "takanari"
+  },
+  {
+    uid : "982713jjahdfd234",
+    publish: true,
+    name: "teruya"
+  },
+  {
+    uid : "fnbjklj234129408",
+    publish: false,
+    name: "ataru"
+  },
+  {
+    uid : "fjkdkj213098masd",
+    publish: true,
+    name: "mitsunori"
+  },
 ]
 
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-  });
+const text = JSON.stringify(users)
 
-readline.question('追加するキャラクターを選んでください', (answer1) => {
-  readline.question('追加するアイテムを選んでください', (answer2) => {
-    for(let i = 0; i < charctar.length; ++i){
-      if(charctar[i].name == `${answer1}`){
-        charctar[i].items.push(`${answer2}`);
-      }
+fs.writeFile('data.txt', text,err=>{
+  if(!err)return
+  console.error(err)
+});
+
+fs.readFile("data.txt", 'utf-8', function(err, data) {
+  users = JSON.parse(data)
+  for(let i = 0; i < users.length; ++i){
+    if(users[i].publish == true){
+      console.log(users[i])
     }
-    const fs = require('fs');
-    const text = `${answer2}`;
-    fs.writeFile('savedata.txt', text,err=>{
-      if(!err)return
-      console.error(err)
-    });
-
-    for(let i = 0; i < charctar.length; ++i){
-      console.log(charctar[i])
-    }
-    readline.close()
-
-
-    fs.readFile("savedata.txt", 'utf-8', (err, data) => {
-      if (err) throw err;
-        var obj = JSON.parse(data);
-        charctar[1].items.push(obj);
-
-    });
-  });
+  }
 });
